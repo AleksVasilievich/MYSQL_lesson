@@ -1,1 +1,40 @@
+CREATE DATABASE IF NOT EXISTS homework2;
+
+USE homework2;
+
+DROP TABLE IF EXISTS sales;
+
+CREATE TABLE sales
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATE NOT NULL,
+    count_product INT
+);
+
+INSERT sales(order_date, count_product)
+VALUES
+    ('2023-01-01', '155'),
+    ('2023-01-02', '180'),
+    ('2023-01-03', '20'),
+    ('2023-01-02', '125'),
+    ('2023-01-02', '376');
+    
+SELECT *
+FROM sales;
+
+-- №2
+
+SELECT
+    id AS "id заказа",
+    count_product AS "тип заказа",
+    CASE
+        WHEN count_product < 100
+            THEN "Маленький заказ"
+        WHEN count_product > 100 AND count_product < 300
+	        THEN "Средний заказ"
+        WHEN count_product  > 300
+            THEN "Большой заказ"
+        ELSE "error"
+    END AS tape_order
+FROM sales;
 
