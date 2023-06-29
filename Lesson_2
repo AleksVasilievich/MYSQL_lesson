@@ -40,3 +40,5 @@ SELECT
     END AS tape_order
 FROM sales;
 
+--№3
+
