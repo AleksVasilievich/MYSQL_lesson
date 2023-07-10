@@ -48,3 +48,4 @@ FROM cars WHERE `name` = "Audi" OR `name` = "Skoda";
 SELECT *
 FROM cars_A;
 
+
