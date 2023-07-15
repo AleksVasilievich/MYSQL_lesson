@@ -1,1 +1,55 @@
+-- №1. Создайте функцию, которая принимает кол-во секунд и форматирует их 
+-- в кол-во дней, часов, минут и секунд.
+-- Пример: 123456 ->'1 days 10 hours 17 minutes 36 seconds '
+
+CREATE DATABASE IF NOT EXISTS homework___6; 
+USE homework___6;
+DROP TABLE IF EXISTS `time`;
+
+CREATE TABLE `time`(seconds INT); 
+
+    
+SELECT * FROM `time`;
+
+DELIMITER //
+CREATE FUNCTION times (seconds int)
+RETURNS VARCHAR(45)
+DETERMINISTIC
+    BEGIN
+        DECLARE days VARCHAR(45);
+        DECLARE hours, minutes, sec VARCHAR(45);
+        DECLARE result VARCHAR(45);
+        SET days = cast(floor(seconds/60/60/24) as CHAR(45));
+        SET hours = cast(floor(mod(seconds/60/60/24,1)*24) as CHAR(45));
+        SET minutes = cast(floor(mod(mod(seconds/60/60/24,1)*24,1)*60) as CHAR(45));
+        SET sec = cast(round(mod(mod(mod(seconds/60/60/24,1)*24,1)*60,1)*60) as CHAR(45));
+        SET result = concat(days, " days ", hours, " hours ", minutes, " minutes ", sec, " seconds ");
+        RETURN result;
+    END //
+DELIMITER ;
+
+
+SELECT times(123456);
+
+
+-- №2 Выведите только четные числа от 1 до 10 (Через цикл).
+-- Пример: 2,4,6,8,10
+
+DELIMITER // 
+CREATE FUNCTION num_pr2 (num INT) 
+RETURNS VARCHAR(45) 
+DETERMINISTIC 
+BEGIN 
+    DECLARE i INT DEFAULT 0; 
+    DECLARE result VARCHAR(45); 
+    SET result=''; 
+    WHILE i < num DO 
+    SET i = i + 2; 
+    SET result = concat(result, '  ', i); 
+    END while; 
+    RETURN result; 
+END // 
+DELIMITER ; 
+
+SELECT num_pr2(10);
 
